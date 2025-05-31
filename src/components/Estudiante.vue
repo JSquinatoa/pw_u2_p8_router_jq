@@ -67,8 +67,9 @@ export default {
             console.log("Año: ", anio);
             const mes = this.$route.query.mes;
             console.log("Mes: ", mes);         
-        },
-
+        },    
+    },
+    
         beforeCreate(){
         console.log('BeforeCreate');        
         },
@@ -100,8 +101,6 @@ export default {
         unUnmounted(){
             console.log('unUnmounted');        
         }
-    
-    },
     
 }
 </script>
