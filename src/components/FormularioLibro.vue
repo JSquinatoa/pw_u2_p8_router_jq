@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { onUnmounted } from 'vue';
 export default {
     data(){
         return{
@@ -156,7 +157,7 @@ export default {
             }
 
         }
-    }
+    },
 
 }
 </script>

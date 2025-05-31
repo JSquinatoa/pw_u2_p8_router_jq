@@ -62,13 +62,47 @@ export default {
         obtenerPathVaraible(){
             const cedula = this.$route.params.cedula
             console.log("Cedula", cedula);
+
             const anio = this.$route.query.anio;
-            const mes = this.$route.query.mes;
             console.log("Año: ", anio);
+            const mes = this.$route.query.mes;
             console.log("Mes: ", mes);         
+        },
+
+        beforeCreate(){
+        console.log('BeforeCreate');        
+        },
+        created(){
+            console.log('Create');        
+        },
+        beforeMount(){
+            console.log('beforemounted');        
+        },
+        mounted(){
+            console.log('mounted'); 
+            const cedula = this.$route.params.cedula
+            console.log("Cedula", cedula);
+
+            const anio = this.$route.query.anio;
+            console.log("Año: ", anio);
+            const mes = this.$route.query.mes;
+            console.log("Mes: ", mes);        
+        },
+        beforeUpdate(){
+            console.log('beforeUpdate');        
+        },
+        updated(){
+            console.log('updated');        
+        },
+        beforeUnmount(){
+            console.log('beforeUnmount');        
+        },
+        unUnmounted(){
+            console.log('unUnmounted');        
         }
     
-    }
+    },
+    
 }
 </script>
 
