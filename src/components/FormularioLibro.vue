@@ -2,15 +2,25 @@
   <div class="container">
     <h1>Bibilioteca John Quinatoa</h1>
     <div class="inputs">
-        <p type="Titulo: "><input type="text" v-model="nuevoTitulo" placeholder="Ingrese el Libro"></p>
-        <p type="Autor: "><input type="text" v-model="nuevoAutor" placeholder="Ingrese el Año"></p>
-        <p type="Año: "><input type="date" v-model="nuevoAnio" ></p>
-        <p type="Editorial: "><input type="text" v-model="nuevoEditorial" placeholder="Ingrese la Editorial"></p>
-        <p type="Número de páginas: "><input type="number" v-model="nuevasPaginas"></p>
+        <p type="Titulo: "><input type="text" v-model="nuevoTitulo" placeholder="Ingrese el Libro">
+        <span v-if="mensaje.titulo">{{mensaje.titulo}}</span></p>
+
+        <p type="Autor: "><input type="text" v-model="nuevoAutor" placeholder="Ingrese el Autor">
+        <span v-if="mensaje.autor">{{mensaje.autor}}</span></p>
+
+        <p type="Año: "><input type="date" v-model="nuevoAnio" >
+        <span v-if="mensaje.anio">{{mensaje.anio}}</span></p>
+
+        <p type="Editorial: "><input type="text" v-model="nuevoEditorial" placeholder="Ingrese la Editorial">
+        <span v-if="mensaje.editorial">{{mensaje.editorial}}</span></p>
+
+        <p type="Número de páginas: "><input type="number" v-model="nuevasPaginas">
+        <span v-if="mensaje.paginas">{{mensaje.paginas}}</span></p>
+
         <button @click="agregarLibro()">Agregar Libro</button>
     </div>
     <div v-if="mostrar">
-        <h1> Libro Agregado Correctamente</h1>
+        <h1> {{mensajeFinal}}</h1>
     </div>
     <div class="info">
         <table>
@@ -46,38 +56,105 @@ export default {
                 {titulo: "Cien años de soledad", autor: "Gabriel García Márquez", anio: "1967-05-30", editorial: "Sudamericana", paginas: 471},
                 {titulo: "1984", autor: "George Orwell", anio: "1949-06-08", editorial: "Secker & Warburg", paginas: 328}
             ],
-            nuevoTitulo: '',
-            nuevoAutor: '',
-            nuevoAnio: '',
-            nuevoEditorial: '',
-            nuevasPaginas: 0,
-            mostrar: false
+            nuevoTitulo: null,
+            nuevoAutor: null,
+            nuevoAnio: null,
+            nuevoEditorial: null,
+            nuevasPaginas: null,
+            mostrar: false,
+            mensaje:{
+                titulo: null,
+                autor: null,
+                anio: null,  
+                editorial: null,
+                paginas: null         
+            },
+            mensajeFinal: null 
         }
     },
     methods:{
         agregarLibro(){
-
-            const nuevoLibro = {
-                titulo: this.nuevoTitulo,
-                autor: this.nuevoAutor, 
-                anio: this.nuevoAnio, 
-                editorial: this.nuevoEditorial, 
-                paginas: this.nuevasPaginas
+            if (this.validarEntradas()) {
+                
+                const nuevoLibro = {
+                    titulo: this.nuevoTitulo,
+                    autor: this.nuevoAutor, 
+                    anio: this.nuevoAnio, 
+                    editorial: this.nuevoEditorial, 
+                    paginas: this.nuevasPaginas
+                }
+                
+                this.libros.unshift(nuevoLibro);
+                this.mostrar = true
+                this.mensajeFinal="Libro Guardado Correctamente"
+                setTimeout(() => {
+                    this.mostrar = false               
+                }, 3500)                
+                this.limpiarCampos()
             }
-            
-            this.libros.unshift(nuevoLibro);
-            this.mostrar = true
-            setTimeout(() => {
-                this.mostrar = false               
-            }, 3500)
-            this.limpiarCampos()
         },
+
         limpiarCampos(){   
-            this.nuevoTitulo= ''
-            this.nuevoAutor= ''
-            this.nuevoAnio= ''
-            this.nuevoEditorial= ''
-            this.nuevasPaginas= 0         
+            this.nuevoTitulo = null
+            this.nuevoAutor = null
+            this.nuevoAnio = null
+            this.nuevoEditorial = null
+            this.nuevasPaginas = null     
+
+            this.mensaje.titulo = null
+            this.mensaje.autor = null
+            this.mensaje.anio = null
+            this.mensaje.editorial = null
+            this.mensaje.paginas = null
+        },
+
+        validarEntradas(){
+            try {              
+
+                let validar = this.mensaje.titulo.primero
+                let numero = 5
+
+                if (this.nuevoTitulo === null) {   
+                    this.mensaje.titulo = "Titulo es Obligatorio"
+                    numero--
+                }
+
+                if (this.nuevoAutor === null) {   
+                    this.mensaje.autor = "Autor es Obligatorio"
+                    numero--
+                }
+
+                if (this.nuevoAnio === null) {   
+                    this.mensaje.anio = "Año es Obligatorio"
+                    numero--
+                }
+
+                if (this.nuevoEditorial === null) {   
+                    this.mensaje.editorial = "Editorial es Obligatorio"
+                    numero--
+                }
+
+                if (this.nuevasPaginas === null) {   
+                    this.mensaje.paginas = "Número de páginas es Obligatorio"
+                    numero--
+                }
+
+                if (numero === 5) {                
+                    return true
+                }else{
+                    return false
+                }
+            } catch (error) {
+                console.error("Error ha ocurrido un problema");
+                console.error(error);               
+                this.mensajeFinal = "Ha ocurrido un error en el sistema";
+                this.mostrar = true
+                setTimeout(() => {
+                    this.mostrar = false
+                }, 2500);
+                
+            }
+
         }
     }
 
@@ -205,7 +282,4 @@ table td {
 .border_rigth{
     border-right: 1px solid black;
 }
-
-
-
 </style>
