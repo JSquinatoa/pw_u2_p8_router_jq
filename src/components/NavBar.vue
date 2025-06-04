@@ -11,6 +11,7 @@
         <router-link to="/FormularioLibro">FormularioLibro</router-link> |
         <router-link to="/HolaMundo">HolaMundo</router-link> |
         <router-link to="/Pregunta">Pregunta</router-link> |
+        <router-link to="/Pokemon">Pokemon</router-link> |
     </nav>
   </div>
 </template>
