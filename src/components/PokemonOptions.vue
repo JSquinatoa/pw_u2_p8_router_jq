@@ -1,17 +1,22 @@
 <template>
   <div class="options-container">
     <ul>
-        <li>Pokemon 1</li>
-        <li>Pokemon 2</li>
-        <li>Pokemon 3</li>
-        <li>Pokemon 4</li>
+        <li v-for="pokemon in pokemons" :key="pokemon.id"> {{pokemon.nombre}} </li>
     </ul>
 
   </div>
 </template>
 
 <script>
+
 export default {
+
+    props:{
+        pokemons:{
+            type: Array,
+            required: true
+        }
+    }
 
 }
 </script>
@@ -40,6 +45,5 @@ li{
 li:hover{
     background-color: rgba(159, 179, 196, 0.7);
 }
-
 
 </style>
