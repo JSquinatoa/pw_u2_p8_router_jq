@@ -49,3 +49,7 @@ const obtenerOpciones = async (longitud) => {
 export const obtenerOpcionesFachada = async (longitud) =>{
     return await obtenerOpciones(longitud)
 }
+
+export const obtenerAletorioFachada = (min, max) => {
+    return obtenerAletorio(min, max)
+}
