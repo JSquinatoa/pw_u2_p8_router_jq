@@ -12,6 +12,7 @@
         <router-link to="/HolaMundo">HolaMundo</router-link> |
         <router-link to="/Pregunta">Pregunta</router-link> |
         <router-link to="/Pokemon">Pokemon</router-link> |
+        <router-link to="/Responsivo">Responsivo</router-link> |
     </nav>
   </div>
 </template>
